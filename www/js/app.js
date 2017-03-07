@@ -23,9 +23,14 @@
 // ...additional event handlers here...
 $(function(){
 
-$('.footer1 .icon').click(function(){ 
-    $('.footer1 .icon').removeClass('tab_activo');
-    $(this).addClass('tab_activo');
-});
+	$('.footer1 .icon').click(function(){ 
+		$('.footer1 .icon').removeClass('tab_activo');
+		$(this).addClass('tab_activo');
+	});
+	
+	$('.linkApoyo').click(function(){
+		var url = $(this).data('href');
+		window.open(url, '_self ', 'location=yes');
+	});
  
 });
