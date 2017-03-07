@@ -28,8 +28,10 @@
     
 $( document ).ready(function() {
     
-   CalcularFondos();             
-        
+
+    CalcularFondos();   
+    CalcularValorGanado();
+ //estimacion del tiempo       
  $('#txtOptimista').change(function(){
         CalcularFondos();       
         
@@ -51,9 +53,33 @@ $( document ).ready(function() {
         
     });
     
+    
+//valor ganado
+    $('#txtValorPlaneado').change(function(){
+        CalcularValorGanado();       
+        
+    });
+    
+     $('#txtValorGanado').change(function(){
+        CalcularValorGanado();       
+        
+    });
+    
+    $('#txtCosteReal').change(function(){
+        CalcularValorGanado();       
+        
+    }); 
+    
+      $('#txtPresupuesto').change(function(){
+        CalcularValorGanado();       
+        
+    }); 
+    
+    
+    
+    
+    
 function CalcularFondos(){
-    
-    
     
     var O = parseInt($('#txtOptimista').val());  
     var P = parseInt($('#txtPesimista').val());  
@@ -85,6 +111,110 @@ function CalcularFondos(){
   }
      
 }
+
+function CalcularValorGanado(){
+    
+    var PV = parseFloat($('#txtValorPlaneado').val());  
+    var EV = parseFloat($('#txtValorGanado').val());  
+    var AC = parseFloat($('#txtCosteReal').val());  
+    var BAC =parseFloat($('#txtPresupuesto').val());
+    
+    if (PV >= 0 && EV >= 0 && AC >0 && BAC)
+    {
+       
+    var CV = EV-AC;
+    var SV = EV-PV; 
+    var CPI =  (EV / AC);
+    var SPI = (EV / PV);
+    var TCPI = ((BAC-EV) / (BAC-AC));  
+    var EAC1 = (BAC / CPI);       
+    var EAC2 = (AC + BAC -EV);
+    
+   
+
+    var lineaCV= 'CV = <b> ' + CV + '</b>  (Costo).';
+    var lineaSV= 'SV = <b> ' + SV + '</b>  (Cronograma).';
+        
+    var lineaCPI= 'CPI = <b> ' +  CPI.toFixed(2) + '</b>  (Costo).';
+    var lineaSPI= 'SPI = <b> ' + SPI.toFixed(2) + '</b>  (Cronograma).';
+    var lineaTCPI= 'TCPI = <b> ' + TCPI.toFixed(2) + '</b>  (Por Completar).';
+    var lineaEAC1= 'EAC1 = <b> ' + EAC1.toFixed(2)+ '</b>  (Desempeño actual).';
+    var lineaEAC2= 'EAC2 = <b> ' + EAC2.toFixed(2) + '</b>  (Desempeño planeado).';
+   
+    var conclusiontiempo = '';        
+    if (SPI < 1)
+        conclusiontiempo = 'Cronograma retrasado';
+    else if (SPI == 0)
+         conclusiontiempo = 'Cronograma adelantado';
+    else
+         conclusiontiempo = 'Cronograma a tiempo';
+        
+        
+    var conclusioncosto = '';        
+    if (CPI < 1)
+        conclusioncosto = 'Presupuesto con sobrecosto';
+    else if (SPI == 0)
+         conclusioncosto = 'Presupuesto planeado';
+    else
+         conclusioncosto = 'Presupuesto debajo de lo planeado';
+      //CSI 
+        var CSI = 0;
+        var lineaCSI = '';
+    if ((SPI > 1 && CPI < 1) || (CPI > 1 && SPI < 1))
+        {
+            
+           CSI = CPI * SPI;
+            
+            if (CSI > 0.9)
+               lineaCSI = 'Proyecto Ok';
+            else if (CSI < 0.8)
+                 lineaCSI = 'Probablemente no se arregle';
+            else
+                 lineaCSI = 'Se puede arreglar';
+            
+            lineaCSI = lineaCSI + ' (CSI = ' + CSI.toFixed(2) + ')';
+        }
+        
+        
+        
+    var lineaconclusion=  conclusiontiempo + '<br>' + conclusioncosto;        
+    if (CSI > 0)
+        lineaconclusion += '<br>' + lineaCSI;
+        
+   
+        
+    $("#divCV").html(lineaCV);
+    $("#divSV").html(lineaSV);
+    
+    $("#divCPI").html(lineaCPI);
+    $("#divSPI").html(lineaSPI);
+    
+    $("#divTCPI").html(lineaTCPI);
+    $("#divEAC1").html(lineaEAC1);
+    $("#divEAC2").html(lineaEAC2);
+    
+    $("#divConclusion").html(lineaconclusion);
+
+        
+    }
+    else
+{
+     $("#divCV").html('');
+    $("#divSV").html('');
+    
+    $("#divCPI").html('');
+    $("#divSPI").html('');
+    
+    $("#divTCPI").html('');
+    $("#divEAC1").html('');
+    $("#divEAC2").html('');
+    
+    $("#divConclusion").html('');
+  }
+     
+}
+
+
 })
    
     
@@ -113,9 +243,10 @@ function CalcularFondos(){
         <div class="footer1">
         
             <a href="#tab1" class="icon home tab_activo" onclick="$.afui.clearHistory()">Home</a>
-            <a href="#tab2" class="icon star">MAP55</a>                    
-            <a href="#tab3" class="icon cloud">Links</a>
-            <a href="#tab4" class="icon info">About</a>
+            <a href="#tab2" class="icon paper">EV</a>
+            <a href="#tab3" class="icon star">MAP55</a>                    
+            <a href="#tab4" class="icon cloud">Links</a>
+            <a href="#tab5" class="icon info">About</a>
         </div>
         
 
@@ -124,18 +255,6 @@ function CalcularFondos(){
 
             <!--Tab View Pages-->
             <div class="panel" data-title="Tarea" id="tab1" data-selected="true">
-              
-     <picture>
-          <source
-            media="(min-width: 650px)"
-            srcset="images/tiempolarge.jpg">
-          <source
-            media="(min-width: 465px)"
-            srcset="images/tiempomedium.jpg">
-          <img
-            src="images/tiemposmall.jpg" class="imgcenter"
-            alt="Tiempo">
-     </picture>
              <div>
                   
             <p><center><h4>Estimación del tiempo para completar una tarea por el método de las 3 duraciones</h4></center></p>
@@ -190,8 +309,83 @@ function CalcularFondos(){
 
 
 
+            <!--Tab View Pages-->
+<div class="panel" data-title="EV" id="tab2">
+              
+    
+             <div>
+                  
+            <p><center><h4>Indicadores pricipales de la técnica de Valor Ganado</h4></center></p>
+            <p><div>Modifica los valores para hacer el cálculo </div></p>                         
+             </div>
+                
+           
+                <div class="item item-input " >
+                   <span class="input-label"><b>(PV)</b>Valor Planeado</span> 
+                <input  type="number" id="txtValorPlaneado" value="90000" required="required" placeholder="Valor Planeado">                
+                 </div>
+                
+                
+               
+                 <div class="item item-input " >            
+                <span class="input-label"><b>(EV)</b>Valor Ganado</span>    
+                 <input type="number" id="txtValorGanado" value="64800" required="required" placeholder="Valor Ganado"> 
+                </div>
 
-<div class="panel" data-title="MAP55" id="tab2">
+                
+                
+                 <div class="item item-input " >                 
+                    <span class="input-label"><b>(AC)</b>Coste Real</span>
+                     <input type="number" id="txtCosteReal" value="58000" required="required" placeholder="Coste Real">
+                    
+                </div>
+
+                 <div class="item item-input " >                 
+                    <span class="input-label"><b>(BAC)</b>Presupuesto</span>
+                     <input type="number" id="txtPresupuesto" value="200000" required="required" placeholder="Presupuesto al concluir">
+                    
+                </div>
+               
+        <div class="buttonionic button-balanced button-block "><b>Variaciones</b></div>
+        <div class="item item-input ">
+             <p><div id="divCV"> </div></p>
+      
+        </div>
+        <div class="item item-input ">
+           <p><div id="divSV"> </div></p>    
+                   
+        </div>
+
+<div class="buttonionic button-balanced button-block "><b>Índices de desempeño</b></div>
+        <div class="item item-input ">
+             <p><div id="divCPI"> </div></p>
+      
+        </div>
+        <div class="item item-input ">
+           <p><div id="divSPI"> </div></p>    
+                   
+        </div>
+        <div class="item item-input ">
+           <p><div id="divTCPI"> </div></p>    
+                   
+        </div>
+        <div class="item item-input ">
+           <p><div id="divEAC1"> </div></p>    
+                   
+        </div>
+         <div class="item item-input ">
+           <p><div id="divEAC2"> </div></p>    
+                   
+        </div>
+      
+       <p><div id="divConclusion"> </div></p>
+
+
+
+</div>
+
+
+        <div class="panel" data-title="MAP55" id="tab3">
             <b>
                 <ul class="list">
                     <li><a href="#position1"><div>MAP Diego Meneses</div></a></li>
@@ -245,7 +439,7 @@ function CalcularFondos(){
             </div>
 
            
-            <div class="panel" data-title="Links" id="tab3" >
+            <div class="panel" data-title="Links" id="tab4" >
                 <ul class="list">
                      <li><a href="http://www.uci.ac.cr">UCI</a></li>  
                      <li><a href="https://www.pmi.org/">PMI</a></li> 
@@ -254,7 +448,7 @@ function CalcularFondos(){
                 </ul>
             </div>
 
-        <div class="panel" data-title="About" id="tab4" >
+        <div class="panel" data-title="About" id="tab5" >
                 <img src="images/uinik.png" class="imgcenter"></img>
                 <div>
                     <p><center>App desarrollada por Uinik </center></p>                  
