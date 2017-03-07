@@ -1,0 +1,218 @@
+{
+  "project": {
+    "projectSettingsVersion": "3.0.0",
+    "creationData": {
+      "projectTypeName": "com.intel.xdk.projecttype.webapp",
+      "src": "webapp/sample-yoga/sample.zip",
+      "projectGuid": "476f58ce-eebd-4f2f-b1df-fcd3c80bb465",
+      "lastModifiedDate": 1488827529427,
+      "creationDate": 1488471825895
+    },
+    "XDK-app-designer": "true",
+    "sourceDirectory": "www",
+    "startFile": "index.html",
+    "projectFiles": {
+      "xdk-publish-meta-data.json": {
+        "settings": {
+          "project": {
+            "XDK-not-deployed": "True"
+          }
+        }
+      }
+    },
+    "projectDirectories": {},
+    "libraries": [],
+    "serviceMethods": [],
+    "cordovaPluginsDirectory": "plugins",
+    "cordovaPlugins": [],
+    "buildConfigurations": {
+      "Android": {
+        "platform_": "android",
+        "runtime_": "W3C on Crosswalk",
+        "name_": "Android",
+        "preferences_": {
+          "android-minSdkVersion": "14",
+          "android-targetSdkVersion": "21",
+          "android-installLocation": "auto",
+          "android-signed": true
+        },
+        "isActive_": true,
+        "certificateId_": "aN-71VRRLk2i6MoXrhqFYA2",
+        "appName_": "HowLongMyTask",
+        "appID_": "howlongmytask.com",
+        "appAccess_": {
+          "mode": "whitelist",
+          "network": [
+            "http://debug-software.intel.com/*",
+            "https://debug-software.intel.com/*",
+            "http://www.uci.ac.cr/*",
+            "https://www.pmi.org/*",
+            "https://www.linkedin.com/*"
+          ],
+          "intents": [],
+          "navigation": [],
+          "properties": {}
+        },
+        "icons_": [
+          {
+            "density": "mdpi",
+            "relPath": "package-assets/icono48.png",
+            "width": 48,
+            "height": 48
+          },
+          {
+            "density": "hdpi",
+            "relPath": "package-assets/icono72.png",
+            "width": 72,
+            "height": 72
+          },
+          {
+            "density": "ldpi",
+            "relPath": "package-assets/icono36.png",
+            "width": 36,
+            "height": 36
+          }
+        ],
+        "splashes_": [],
+        "addlPermissions_": "",
+        "excludedLibraries_": "",
+        "cordovaCLIVersion_": "6.2.0",
+        "crosswalkVersion_": "19",
+        "appVersion_": "0.0.1",
+        "appDescription_": "Estimación de la duración tareas con el mètodo de las 3 duraciones",
+        "appAuthor_": "MAP Jordi Gomez",
+        "appVersionCode_": "1",
+        "signed_": true
+      },
+      "iOS": {
+        "platform_": "ios",
+        "runtime_": "W3C on Cordova",
+        "name_": "iOS",
+        "preferences_": {
+          "ios-configuration": "adhoc",
+          "deployment-target": "8.0"
+        },
+        "isActive_": true,
+        "certificateId_": "",
+        "appName_": "IWannaBeRich",
+        "appID_": "iwannaberich.com",
+        "appAccess_": {
+          "mode": "whitelist",
+          "network": [
+            "http://debug-software.intel.com/*",
+            "https://debug-software.intel.com/*",
+            "http://www.uci.ac.cr/*",
+            "https://www.pmi.org/*"
+          ],
+          "intents": [],
+          "navigation": [],
+          "properties": {}
+        },
+        "icons_": [],
+        "splashes_": [],
+        "addlPermissions_": "",
+        "excludedLibraries_": "",
+        "iosProvs_": [],
+        "cordovaCLIVersion_": "6.2.0",
+        "crosswalkVersion_": "19",
+        "appVersion_": "0.0.1",
+        "appAuthor_": "Intel XDK",
+        "appDescription_": "Estimación de la duración tareas con el mètodo de las 3 duraciones"
+      },
+      "Windows8": {
+        "platform_": "windows8",
+        "runtime_": "W3C on Cordova",
+        "name_": "Windows8",
+        "preferences_": {
+          "windows-publisher-display-name": "",
+          "windows-publisher-id": ""
+        },
+        "isActive_": true,
+        "certificateId_": "",
+        "appName_": "IWannaBeRich",
+        "appID_": "xdk.intel.sample",
+        "appAccess_": {
+          "mode": "whitelist",
+          "network": [
+            "http://debug-software.intel.com/*",
+            "https://debug-software.intel.com/*",
+            "http://www.uci.ac.cr/*",
+            "https://www.pmi.org/*"
+          ],
+          "intents": [],
+          "navigation": [],
+          "properties": {}
+        },
+        "icons_": [],
+        "splashes_": [],
+        "addlPermissions_": "",
+        "excludedLibraries_": "",
+        "cordovaCLIVersion_": "6.2.0",
+        "crosswalkVersion_": "19",
+        "appVersion_": "0.0.0.1",
+        "appAuthor_": "Intel XDK",
+        "appDescription_": "Estimación de la duración tareas con el mètodo de las 3 duraciones"
+      },
+      "WebApp": {
+        "platform_": "webapp",
+        "runtime_": "W3C",
+        "name_": "WebApp",
+        "preferences_": {},
+        "isActive_": false,
+        "certificateId_": "",
+        "appName_": "Yoga",
+        "appID_": "xdk.intel.sample",
+        "appAccess_": {
+          "mode": "legacy",
+          "network": [
+            "http://debug-software.intel.com/*",
+            "https://debug-software.intel.com/*",
+            "http://en.wikipedia.org/*",
+            "http://www.yogajournal.com/*"
+          ],
+          "intents": [],
+          "navigation": []
+        },
+        "icons_": [],
+        "splashes_": [],
+        "addlPermissions_": "",
+        "excludedLibraries_": "",
+        "appAuthor_": "Intel XDK",
+        "appVersion_": "0.0.1"
+      },
+      "Chrome": {
+        "platform_": "chromeos",
+        "runtime_": "W3C on Chrome OS",
+        "name_": "Chrome",
+        "preferences_": {},
+        "isActive_": false,
+        "certificateId_": "",
+        "appName_": "IWannaBeRich",
+        "appID_": "xdk.intel.sample",
+        "appAccess_": {
+          "mode": "legacy",
+          "network": [
+            "http://debug-software.intel.com/*",
+            "https://debug-software.intel.com/*",
+            "http://en.wikipedia.org/*",
+            "http://www.yogajournal.com/*"
+          ],
+          "intents": [],
+          "navigation": []
+        },
+        "icons_": [],
+        "splashes_": [],
+        "addlPermissions_": "",
+        "excludedLibraries_": "",
+        "appAuthor_": "Intel XDK",
+        "appVersion_": "0.0.1"
+      }
+    },
+    "gameAssetDirectory": "asset",
+    "gameMetadata": {},
+    "projectTags": [
+      "XDK-disallow-legacy-whitelist"
+    ],
+    "testDirectory": "test"
+  }
+}

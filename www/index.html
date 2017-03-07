@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<!--HTML5 doctype-->
+<html
+
+<head>
+
+    <title>Tab View Template</title>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <link rel="stylesheet" type="text/css" href="lib/appframework/icons.css" />
+    <link rel="stylesheet" type="text/css" href="lib/appframework/af.ui.css" />
+    <link rel="stylesheet" type="text/css" href="css/app.css" />
+    <link rel="stylesheet" type="text/css" href="css/ionic.css" />
+
+    <script type="text/javascript" charset="utf-8" src="lib/xdk-win8x-compat.js"></script>
+    <script type="text/javascript" charset="utf-8" src="lib/jquery.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+ 
+    <script type="text/javascript" charset="utf-8" src="lib/fastclick.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="lib/appframework/appframework.ui.min.js"></script>  
+    
+<script >
+ 
+    
+$( document ).ready(function() {
+    
+   CalcularFondos();             
+        
+ $('#txtOptimista').change(function(){
+        CalcularFondos();       
+        
+    });
+    
+     $('#txtPesimista').change(function(){
+        CalcularFondos();       
+        
+    });
+    
+     $('#txtProbable').change(function(){
+        CalcularFondos();       
+        
+    });
+    
+
+     $('#cmbUnidad').change(function(){
+        CalcularFondos();       
+        
+    });
+    
+function CalcularFondos(){
+    
+    
+    
+    var O = parseInt($('#txtOptimista').val());  
+    var P = parseInt($('#txtPesimista').val());  
+    var M = parseInt($('#txtProbable').val());  
+    var unidad = $('#cmbUnidad').val();
+    
+    if (O >= 0 && P >= 0 && M >=0)
+    {
+    var beta = Math.round((O+P+(4*M))/6);
+    var triangular = Math.round((O+P+M)/3);
+  
+        
+    var lineabeta= '<b> ' + beta + ' ' + unidad + '</b>  (Beta).';
+    var lineatriangular= '<b> ' + triangular + ' ' + unidad + '</b>  (Triangular).';
+    var lineamejorbeta= 'La distribución <b>Beta (PERT)</b> es más precisa que la triangular.';
+   
+        
+    $("#divBeta").html(lineabeta);
+    $("#divTriangular").html(lineatriangular);
+    $("#divMejorBeta").html(lineamejorbeta);
+        
+    }
+    else
+        {
+             $("#divBeta").html('');
+            $("#divTriangular").html('');
+             $("#divMejorBeta").html('');
+            
+  }
+     
+}
+})
+   
+    
+
+  </script>
+
+</head>
+
+<body >
+
+    <div id="splashscreen" class='ui-loader heavy'>
+        How Long My Task
+        <br>
+        <br>
+        <span class='ui-icon ui-icon-loading spin'></span>
+        <h1>How Long My Task</h1>
+    </div>
+
+    <div class="view" >
+        <header>
+            <h1>Title</h1>
+<!--            <a id="backButton" class="button back" style="visibility: visible; ">Back</a>  -->
+           
+        </header>
+        
+        <div class="footer1">
+        
+            <a href="#tab1" class="icon home tab_activo" onclick="$.afui.clearHistory()">Home</a>
+            <a href="#tab2" class="icon star">MAP55</a>                    
+            <a href="#tab3" class="icon cloud">Links</a>
+            <a href="#tab4" class="icon info">About</a>
+        </div>
+        
+
+        <div class="pages">
+            
+
+            <!--Tab View Pages-->
+            <div class="panel" data-title="Tarea" id="tab1" data-selected="true">
+              
+     <picture>
+          <source
+            media="(min-width: 650px)"
+            srcset="images/tiempolarge.jpg">
+          <source
+            media="(min-width: 465px)"
+            srcset="images/tiempomedium.jpg">
+          <img
+            src="images/tiemposmall.jpg" class="imgcenter"
+            alt="Tiempo">
+     </picture>
+             <div>
+                  
+            <p><center><h4>Estimación del tiempo para completar una tarea por el método de las 3 duraciones</h4></center></p>
+            <p><div>Modifica los valores para hacer el cálculo </div></p>                         
+             </div>
+                
+            
+               <div class="item item-select">
+                    <span class="input-label">Unidad</span>                    
+                    <select id="cmbUnidad" name="cmbUnidad" >
+                            <option value ="Minutos">Minutos</option>
+                            <option value ="Horas" selected="selected"> Horas</option>
+                            <option value="Días">Días</option>
+                            <option value="Semanas">Semanas</option>
+                            <option value="Meses">Meses</option>                      
+                        </select>
+                    
+               </div>
+                <div class="item item-input " >
+                   <span class="input-label"><b>(O)</b>Optimista</span> 
+                <input  type="number" id="txtOptimista" value="8" required="required" placeholder="Duración Optimista">                
+                 </div>
+                
+                
+               
+                 <div class="item item-input " >            
+                <span class="input-label"><b>(P)</b>Pesimista</span>    
+                 <input type="number" id="txtPesimista" value="24" required="required" placeholder="Duración Pesimista"> 
+                </div>
+
+                
+                
+                 <div class="item item-input " >                 
+                    <span class="input-label"><b>(M)</b>Probable</span>
+                     <input type="number" id="txtProbable" value="12" required="required" placeholder="Duración Probable">
+                    
+                </div>
+               
+        <div class="buttonionic button-balanced button-block "><b>Resultado</b></div>
+        <div class="item item-input ">
+             <p><div id="divBeta"> </div></p>
+      
+        </div>
+        <div class="item item-input ">
+           <p><div id="divTriangular"> </div></p>    
+                   
+        </div>
+      
+        <p><div id="divMejorBeta"> </div></p>
+        
+        </div>
+
+
+
+
+<div class="panel" data-title="MAP55" id="tab2">
+            <b>
+                <ul class="list">
+                    <li><a href="#position1"><div>MAP Diego Meneses</div></a></li>
+                    <li><a href="#position2"><div>MAP Jordi Gómez </div> </a></li>                  
+                </ul>
+                </b>
+            </div>
+    
+            <div class="panel" title="Diego Meneses" id="position1">
+                        <picture>
+                      <source
+                        media="(min-width: 650px)"
+                        srcset="images/diegomeneseslarge.jpg">
+                      <source
+                        media="(min-width: 465px)"
+                        srcset="images/diegomenesesmedium.jpg">
+                      <img
+                        src="images/diegomenesessmall.jpg" class="imgcenter"
+                        alt="Diego Meneses">
+                 </picture>
+               
+               
+                 <p><center><b>Diego Meneses </b></center></p>
+                <div>                  
+                     <p>Master en Administración de Proyectos por la Universidad para la Cooperación Internacional, Generación MAP55</p> 
+                     <a href="https://www.linkedin.com/in/diego-meneses-c-b2139553/">Linkedin</a>
+                </div>
+            </div>
+
+            <div class="panel" title="Fondo 2" id="position2">
+            <picture>
+                  <source
+                    media="(min-width: 650px)"
+                    srcset="images/jordilarge.jpg">
+                  <source
+                    media="(min-width: 465px)"
+                    srcset="images/jordimedium.jpg">
+                  <img
+                    src="images/jordismall.jpg" class="imgcenter"
+                    alt="Jordi">
+             </picture>
+                <p><center><b>Jordi Gómez Ricárdez </b></center></p>
+                
+                <div>
+                   
+                   <p>Master en Administración de Proyectos por la Universidad para la Cooperación Internacional, Generación MAP55</p> 
+                    <p>Ingeniero em sistemas computacionales, Experiencia en Desarrollo de Aplicaciones Móviles y Sistemas de Información</p> 
+                     <a href=" https://www.linkedin.com/in/jordi-gomez-a9a90098/">Linkedin</a>
+                    
+                </div>
+            </div>
+
+           
+            <div class="panel" data-title="Links" id="tab3" >
+                <ul class="list">
+                     <li><a href="http://www.uci.ac.cr">UCI</a></li>  
+                     <li><a href="https://www.pmi.org/">PMI</a></li> 
+                   
+                   
+                </ul>
+            </div>
+
+        <div class="panel" data-title="About" id="tab4" >
+                <img src="images/uinik.png" class="imgcenter"></img>
+                <div>
+                    <p><center>App desarrollada por Uinik </center></p>                  
+                    
+                </div>
+            </div>
+     
+           
+
+</div>     
+
+
+</div>
+
+</body>
+
+</html>
